@@ -1,0 +1,14 @@
+Package: wince
+Title: Write NetCDF Files for the Obvious Situations
+Version: 0.0.0.9001
+Authors@R: 
+    person("Michael D.", "Sumner", , "mdsumner@gmail.com", role = c("aut", "cre"))
+Description: Create a 3D 'NetCDF' with time or depth as the third dimension, and convention-conforming coordinate system metadata.
+License: MIT + file LICENSE
+Encoding: UTF-8
+Language: es
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.2.1
+Suggests: 
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
