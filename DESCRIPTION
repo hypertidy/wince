@@ -4,6 +4,8 @@ Version: 0.0.0.9001
 Authors@R: 
     person("Michael D.", "Sumner", , "mdsumner@gmail.com", role = c("aut", "cre"))
 Description: Create a 3D 'NetCDF' with time or depth as the third dimension, and convention-conforming coordinate system metadata.
+ Eventually we'll set this up to write slice by slice which is easy once the file is instantiated, but atm it's purely an experiment. 
+ We might include capability to create 4D ones too. 
 License: MIT + file LICENSE
 Encoding: UTF-8
 Language: es
