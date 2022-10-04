@@ -6,8 +6,8 @@ raster_variables <- function(data, extent = NULL,
   dimension <- dim(data)
 
 
-  xx <- vaster::x_centre(extent, dimension)
-  yy <- vaster::y_centre(extent, dimension)
+  xx <- vaster::x_centre(dimension, extent)
+  yy <- vaster::y_centre(dimension, extent)
 
   x_dim <-   ncdf4::ncdim_def("x", "metres or degrees WIP", xx, create_dimvar = T)
   y_dim <-   ncdf4::ncdim_def("y", "metres or degrees WIP", yy, create_dimvar = T)

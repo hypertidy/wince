@@ -10,7 +10,7 @@ write_nc(
   extent = NULL,
   title = "raster",
   zvar = NULL,
-  z_type = "time",
+  z_type = NULL,
   data_name = NULL,
   data_unit = "some.unit",
   long_name = "some.long.name",
