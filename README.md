@@ -10,6 +10,8 @@ The goal of wince is to …
 
 TODO
 
+-   [ ] make create_nc and write_nc separate, so create is a
+    function(dimension, extent = NULL, etc)
 -   [ ] convert to RNetCDF
 -   [ ] include grid_mapping dummy variable
 -   [ ] various fixmes, global atts, good names, integer vs float vs
@@ -33,7 +35,7 @@ library(wince)
 f <- write_nc(volcano, extent = c(0, 87, 0, 61), zvar = -1, z_type = "elevation")
 tidync::tidync(f)
 #> 
-#> Data Source (1): file3892a663e389c6.nc ...
+#> Data Source (1): file1d64e43cade63f.nc ...
 #> 
 #> Grids (4) <dimension family> : <associated variables> 
 #> 

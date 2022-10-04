@@ -25,6 +25,7 @@ The goal of wince is to ...
 
 TODO
 
+- [ ] make create_nc and write_nc separate, so create is a function(dimension, extent = NULL, etc)
 - [ ] convert to RNetCDF
 - [ ] include grid_mapping dummy variable
 - [ ] various fixmes, global atts, good names, integer vs float vs byte etc. 

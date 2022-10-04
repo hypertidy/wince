@@ -6,7 +6,15 @@
 \alias{wince-package}
 \title{wince: Write NetCDF Files for the Obvious Situations}
 \description{
-Create a 3D 'NetCDF' with time or depth as the third dimension, and convention-conforming coordinate system metadata.
+Create a 3D 'NetCDF' with time or depth as the third dimension, and convention-conforming coordinate system metadata. Eventually we'll set this up to write slice by slice which is easy once the file is instantiated, but atm it's purely an experiment. We might include capability to create 4D ones too.
+}
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://github.com/hypertidy/wince}
+  \item Report bugs at \url{https://github.com/hypertidy/wince/issues}
+}
+
 }
 \author{
 \strong{Maintainer}: Michael D. Sumner \email{mdsumner@gmail.com}
