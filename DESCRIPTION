@@ -7,7 +7,11 @@ Description: Create a 3D 'NetCDF' with time or depth as the third dimension, and
  Eventually we'll set this up to write slice by slice which is easy once the file is instantiated, but atm it's purely an experiment. 
  We might include capability to create 4D ones too. 
 License: MIT + file LICENSE
-Imports: ncdf4, vaster
+Imports: 
+    dplyr,
+    ncdf4,
+    RNetCDF,
+    vaster
 Encoding: UTF-8
 Language: es
 Roxygen: list(markdown = TRUE)

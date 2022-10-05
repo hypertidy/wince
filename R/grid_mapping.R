@@ -41,12 +41,12 @@ add_grid_mapping <- function(x, mapping, overwrite = FALSE) {
                         mapping$atts[[i]])
   }
 
-library(dplyr)
-vars <- ncmeta::nc_vars(nc) %>% dplyr::filter(ndims == 2) %>% pull(name)
+
+vars <- ncmeta::nc_vars(nc) |>  dplyr::filter(ndims == 2) |>  dplyr::pull(name)
 for (varname in vars) {
-  att.put.nc(nc, varname, "grid_mapping", "NC_CHAR",  mapping$name)
+  RNetCDF::att.put.nc(nc, varname, "grid_mapping", "NC_CHAR",  mapping$name)
 }
 
-close.nc(nc)
+RNetCDF::close.nc(nc)
 invisible(x)
 }
