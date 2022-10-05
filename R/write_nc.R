@@ -6,6 +6,7 @@ raster_variables <- function(data, extent = NULL,
   dimension <- dim(data)
 
 
+
   xx <- vaster::x_centre(dimension, extent)
   yy <- vaster::y_centre(dimension, extent)
 
@@ -83,8 +84,21 @@ write_nc <- function(data, filename = NULL,
                      data_name = NULL, data_unit = "some.unit", long_name = "some.long.name",
                      params = "", overwrite = FALSE) {
 
+
+    ## we assume raster-oriented input, so we reorient to image()
   dimension <- dim(data)
-  if (is.null(extent)) extent <- c(0, dimension[1L], 0, dimension[2L])
+
+  #dimension <- dim(data)
+  d <- seq_len(length(dim(data)))
+  d[1:2] <- d[2:1]
+  data <- aperm(data, d)
+  if (length(dimension) == 3L) {
+    data <- data[,dimension[1L]:1L,]
+  } else {
+    data <- data[,dimension[1L]:1L ]
+  }
+  dimension <- dimension[2:1]
+  if (is.null(extent)) extent <- c(0, dimension[2L], 0, dimension[1L])
   if (is.null(filename)) filename <- tempfile(fileext = ".nc")
   if (is.null(data_name)) data_name <- deparse1(substitute(data))
   data_name_clean <- gsub("\\s+", "", data_name)
@@ -130,6 +144,9 @@ write_nc <- function(data, filename = NULL,
 
 
   }
+
+
+
   ## note this saves us from 1 or none in the 3rd slot
   ncdf4::ncvar_put(nc_varfile, variables$data, data, count = c(dimension[1:2], lenzvar))
 
