@@ -142,13 +142,18 @@ write_nc <- function(data, filename = NULL,
 
     ncdf4::ncvar_put(nc_varfile, variables$z, variables$z$vals, count = lenzvar)
 
-
   }
 
 
 
   ## note this saves us from 1 or none in the 3rd slot
   ncdf4::ncvar_put(nc_varfile, variables$data, data, count = c(dimension[1:2], lenzvar))
+  #browser()
+#ncdf4::ncatt_put(nc_varfile, variables$data$name, "coordinates",
+#                 paste0(unlist(lapply(variables$data$dim, function(a) a$name)), collapse = " "))
+  ## FIXME: pivot on grid_longitude, grid_latitude
+  ncdf4::ncatt_put(nc_varfile, "x", "standard_name", "projection_x_coordinate")
+  ncdf4::ncatt_put(nc_varfile, "y", "standard_name", "projection_y_coordinate")
 
   filename
 }
