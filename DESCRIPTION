@@ -1,6 +1,6 @@
 Package: wince
 Title: Write NetCDF Files for the Obvious Situations
-Version: 0.0.0.9001
+Version: 0.0.0.9002
 Authors@R: 
     person("Michael D.", "Sumner", , "mdsumner@gmail.com", role = c("aut", "cre"))
 Description: Create a 3D 'NetCDF' with time or depth as the third dimension, and convention-conforming coordinate system metadata.

@@ -157,3 +157,78 @@ write_nc <- function(data, filename = NULL,
 
   filename
 }
+
+
+
+
+
+write_var <- function(data, filename = NULL,
+                     title = "array",
+                     zvar = NULL, z_type = NULL,
+                     data_name = NULL, data_unit = "some.unit", long_name = "some.long.name",
+                     params = "", overwrite = FALSE, append = FALSE) {
+
+
+  if (is.null(data_name)) data_name <- deparse(substitute(data))
+    ## we assume raster-oriented input, so we reorient to image()
+  dimension <- dim(data)
+
+  #dimension <- dim(data)
+  d <- seq_len(length(dim(data)))
+  d[1:2] <- d[2:1]
+  data <- aperm(data, d)
+  if (length(dimension) == 3L) {
+    data <- data[,dimension[1L]:1L,]
+  } else {
+    data <- data[,dimension[1L]:1L ]
+  }
+  dimension <- dimension[2:1]
+  if (is.null(filename)) filename <- tempfile(fileext = ".nc")
+
+  data_name_clean <- gsub("\\s+", "", data_name)
+  if (!identical(data_name, data_name_clean)) {
+    message(sprintf("variable name taken from '%s' may not be suitable - set 'data_name = <sensible variable name>'", data_name))
+    data_name <-data_name_clean
+
+  }
+  if (length(dimension) == 3) {
+    len <- dimension[3L]
+  } else {
+    len <- 1
+  }
+
+
+  if (file.exists(filename) && !overwrite && !append) {
+    stop(sprintf("'filename' already exists, use 'overwrite = TRUE', 'append = TRUE' or delete: \n%s", filename))
+  }
+
+  if (overwrite && append) {
+    stop("if overwrite is TRUE append must be FALSE")
+  }
+
+  if (append) {
+    nc_varfile <-  RNetCDF::open.nc(filename, write = TRUE)
+  } else {
+    nc_varfile <-  RNetCDF::create.nc(filename, clobber = overwrite)
+  }
+  on.exit(RNetCDF::close.nc(nc_varfile), add = TRUE)
+
+
+
+  #assign global attributes to file
+  if (!append) RNetCDF::att.put.nc(nc_varfile, "NC_GLOBAL", name = "something", type =
+                                     "NC_CHAR", "aargh")
+
+
+  if (!append) {
+    dim_ids <- c(RNetCDF::dim.def.nc(nc_varfile, "x", dimension[1]),
+               RNetCDF::dim.def.nc(nc_varfile, "y", dimension[2]))
+  } else {
+    dim_ids <- seq_along(dim(data)) - 1
+  }
+
+  var <- RNetCDF::var.def.nc(nc_varfile, data_name, "NC_DOUBLE", dimensions = dim_ids)
+
+  RNetCDF::var.put.nc(nc_varfile, data_name, data)
+  filename
+}
